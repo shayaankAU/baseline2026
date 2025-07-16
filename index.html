@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Baseline 2026</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<div id="login-bar">
+<div id="login-form">
+  <input type="text" id="regName" placeholder="Username" />
+  <input type="password" id="regPass" placeholder="Password" />
+  <button onclick="registerUser()">Register</button>
+  <button onclick="loginUser()">Login</button>
+</div>
+  <div id="welcome-section" style="display: none;">
+    <span id="welcomeMessage"></span>
+    <button onclick="logoutUser()">Logout</button>
+  </div>
+</div>
+  <header>
+    <h1>Baseline 2026</h1>
+    <nav>
+      <button onclick="showSection('home')">Home</button>
+      <button onclick="showSection('mvp')">MVP Predictions</button>
+      <button onclick="showSection('awards')">Award Predictions</button>
+      <button onclick="showSection('compare')">Player Comparisons</button>
+      <button onclick="showSection('leaderboard')">Leaderboard</button>
+      <button onclick="showSection('search')">Search</button>
+      <button onclick="showSection('takes')">Hot Takes</button>
+      <button onclick="showSection('teams')">Team Spotlight</button>
+      <button onclick="showSection('chat')">Chat Wall</button>
+      <button onclick="showSection('schedule')">Schedule</button>
+      <button onclick="showSection('team-builder')">Team Builder</button>
+    </nav>
+  </header>
+<section id="takes">
+  <h2>Hot Takes & Predictions</h2>
+  <div class="takes-grid">
+    <div class="take-card">
+      <h3>Zion Will Be an All-Star Again</h3>
+      <p>Fully healthy and motivated, Zion will dominate the paint this season and return to All-Star form.</p>
+    </div>
+    <div class="take-card">
+      <h3>Victor Wembanyama = DPOY</h3>
+      <p>With insane length and instincts, Wemby is already the league’s top shot blocker — DPOY incoming.</p>
+    </div>
+    <div class="take-card">
+      <h3>OKC Will Be a Top 2 Seed</h3>
+      <p>Shai, Chet, and that deep young core will explode — don’t sleep on the Thunder in the West.</p>
+    </div>
+    <div class="take-card">
+      <h3>Bronny Will Get Real Minutes</h3>
+      <p>LeBron’s son will surprise the world with poise and defense off the bench for LA.</p>
+    </div>
+  </div>
+</section>
+<section id="chat">
+  <h2>NBA Chat Wall</h2>
+  <div id="chat-messages"></div>
+  <button class="close-btn" onclick="hideSection('chat')">Close</button>
+  <div id="chat-form">
+    <textarea id="chatInput" placeholder="Type your message..."></textarea>
+    <button onclick="postMessage()">Send</button>
+  </div>
+</section>
+<section id="schedule">
+  <h2>NBA 2026 Schedule</h2>
+  <p>Click the button below to view the full, up-to-date NBA schedule.</p>
+  <a href="https://www.nba.com/schedule" target="_blank">
+    <button>View Full Schedule</button>
+  </a>
+</section>
+  <main>
+    <section id="team-builder">
+  <h2>Build Your Dream Team</h2>
+  <div id="builder-form">
+    <label>Select up to 5 players:</label>
+    <div id="player-selects"></div>
+    <button onclick="buildTeam()">Build Team</button>
+  </div>
+  <div id="team-output"></div>
+  <button class="close-btn" onclick="hideSection('team-builder')">Close</button>
+</section>
+
+    <section id="home" class="active">
+      <h2>Welcome to Baseline 2026</h2>
+      <p>Track the top NBA players of 2026, explore predictions, and compare rising stars.</p>
+      <div id="fact-box" class="fact-box">
+  <h3>Did You Know?</h3>
+  <p id="nba-fact">Loading fact...</p>
+  <button onclick="showRandomFact()">New Fact</button>
+</div>
+    </section>
+
+    <section id="mvp">
+      <h2>MVP Predictions</h2>
+      <ul>
+        <li>
+          <strong>Luka Doncic</strong> – Top-tier production and leadership.
+          <button onclick="ratePlayer('Luka Doncic')">Rate</button>
+        </li>
+        <li>
+          <strong>Jayson Tatum</strong> – Two-way dominance.
+          <button onclick="ratePlayer('Jayson Tatum')">Rate</button>
+        </li>
+        <li>
+          <strong>Shai Gilgeous-Alexander</strong> – Most efficient guard in the league.
+          <button onclick="ratePlayer('Shai Gilgeous-Alexander')">Rate</button>
+        </li>
+      </ul>
+      <div id="rating-result"></div>
+    </section>
+
+    <section id="awards">
+      <h2>2026 Season Award Predictions</h2>
+      <ul>
+        <li><strong>Rookie of the Year:</strong> Cooper Flagg</li>
+        <li><strong>DPOY:</strong> Victor Wembanyama</li>
+        <li><strong>MIP:</strong> Scoot Henderson</li>
+      </ul>
+    </section>
+
+    <section id="compare">
+      <h2>Player Comparison</h2>
+      <label for="player1">Select Player 1:</label>
+      <select id="player1">
+        <option>Luka Doncic</option>
+        <option>Shai Gilgeous-Alexander</option>
+        <option>Victor Wembanyama</option>
+      </select>
+      <label for="player2">Select Player 2:</label>
+      <select id="player2">
+        <option>Jayson Tatum</option>
+        <option>Scoot Henderson</option>
+        <option>Joel Embiid</option>
+      </select>
+      <button onclick="comparePlayers()">Compare</button>
+      <div id="comparison-result"></div>
+    </section>
+
+    <section id="leaderboard">
+      <h2>MVP Leaderboard</h2>
+      <table id="leaderboard-table">
+        <tr>
+          <th>Rank</th>
+          <th>Player</th>
+          <th>Team</th>
+          <th>Score</th>
+        </tr>
+      </table>
+    </section>
+
+    <section id="search">
+      <h2>Search Player Stats</h2>
+      <input type="text" id="searchInput" placeholder="Enter player name..." />
+      <button onclick="searchPlayer()">Search</button>
+      <div id="search-result"></div>
+    </section>
+    <section id="teams">
+  <h2>Team Spotlight</h2>
+  <div class="team-grid">
+    <div class="team-card" style="border-top: 6px solid #00538C;">
+      <h3>Oklahoma City Thunder</h3>
+      <p><strong>Stars:</strong> Shai Gilgeous-Alexander, Chet Holmgren, Jalen Williams</p>
+      <p>Elite youth, top 5 offense and defense, and the deepest bench in the West. Serious title threat.</p>
+    </div>
+    <div class="team-card" style="border-top: 6px solid #007A33;">
+      <h3>Boston Celtics</h3>
+      <p><strong>Stars:</strong> Jayson Tatum, Jaylen Brown, Kristaps Porziņģis</p>
+      <p>Veteran experience plus versatile defense — Boston’s ready to make another Finals run.</p>
+    </div>
+    <div class="team-card" style="border-top: 6px solid #C8102E;">
+      <h3>San Antonio Spurs</h3>
+      <p><strong>Stars:</strong> Victor Wembanyama, Devin Vassell</p>
+      <p>Led by the most unique prospect in NBA history, the Spurs are building something scary.</p>
+    </div>
+    <div class="team-card" style="border-top: 6px solid #6F263D;">
+      <h3>Cleveland Cavaliers</h3>
+      <p><strong>Stars:</strong> Donovan Mitchell, Evan Mobley, Darius Garland</p>
+      <p>Mobley’s breakout, Mitchell’s scoring, and Garland’s playmaking — Cleveland is sneaky dangerous.</p>
+    </div>
+  </div>
+</section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
