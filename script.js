@@ -347,11 +347,14 @@ function buildTeam() {
   const selects = document.querySelectorAll("#player-selects select");
   const picked = [];
 
-  selects.forEach(sel => {
-    if (sel.value && !picked.includes(sel.value)) {
-      picked.push(sel.value);
-    }
-  });
+  const names = Array.from(selects).map(sel => sel.value).filter(v => v);
+  const unique = new Set(names);
+  if (names.length !== unique.size) {
+    document.getElementById("team-output").innerHTML = "<p>Please select 5 different players (no duplicates).</p>";
+    return;
+  }
+
+  names.forEach(name => picked.push(name));
 
   if (picked.length === 0) {
     document.getElementById("team-output").innerHTML = "<p>Please select at least one player.</p>";
@@ -387,6 +390,7 @@ function buildTeam() {
   document.getElementById("team-output").innerHTML = summary + `<div class="team-grid">${playerCards}</div>`;
 }
 
+
 function showSection(id) {
   const sections = document.querySelectorAll("main section");
   sections.forEach(section => section.classList.remove("active"));
@@ -395,3 +399,18 @@ function showSection(id) {
   if (id === "leaderboard") renderLeaderboard();
   if (id === "team-builder") renderTeamBuilder();
 }
+document.getElementById("searchButton").addEventListener("click", function () {
+  const searchInput = document.getElementById("searchInput").value.trim().toLowerCase();
+  const resultBox = document.getElementById("search-result");
+  const matchedPlayers = playerPool.filter(player =>
+    player.name.toLowerCase().includes(searchInput)
+  );
+
+  if (matchedPlayers.length === 0) {
+    resultBox.innerHTML = `<p>No players found.</p>`;
+  } else {
+    resultBox.innerHTML = matchedPlayers
+      .map(p => `<p><strong>${p.name}</strong> - ${p.team}</p>`)
+      .join("");
+  }
+});
